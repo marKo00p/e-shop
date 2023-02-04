@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' th:href="@{/css/style.css}">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  page in progress
+    <div th:insert="~{products :: #products-list}"></div>
+    <a th:href="@{/new_card}">Add new item</a>
+</div>
+</body>
+</html>

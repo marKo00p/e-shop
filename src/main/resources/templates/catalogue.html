@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <link rel='stylesheet' th:href="@{/css/style.css}">
+    <title>Title</title>
+</head>
+<body>
+<div class="main with-value">
+  <div class="catalogue-banner">
+    <h1>WOMEN'S BAGS</h1>
+    <p>The history of the purse is the history of women: women’s changing tastes,
+      priorities, and roles in society. </p>
+  </div>
+  <div class="catalogue-container">
+
+    <div th:insert="~{catalogue_card :: #card}"></div>
+    <div th:insert="~{catalogue_card :: #card}"></div>
+    <div th:insert="~{catalogue_card :: #card}"></div>
+    <div th:insert="~{catalogue_card :: #card}"></div>
+    <div th:insert="~{catalogue_card :: #card}"></div>
+
+  </div>
+</div>
+</body>
+</html>
