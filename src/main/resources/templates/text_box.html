@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Title</title>
+</head>
+<body>
+<div class="parent-add_product"><header th:replace="~{index :: index_header}"></header>
+  <div class="main-add_product">
+    <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
+
+      <header class="site-header" id="header">
+          <h1 class="site-header__title" data-lead-id="site-header-title">Thank you!</h1>
+      </header>
+
+      <div class="main-content">
+          <i class="fa fa-check main-content__checkmark" id="checkmark"></i>
+          <p class="main-content__body" data-lead-id="main-content-body">  for your order and for supporting our business. Your order is complite. You will be receiving a confirmation email with order details.</p>
+      </div>
+
+  </div>
+</div>
+  <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
+
+</body>
+</html>

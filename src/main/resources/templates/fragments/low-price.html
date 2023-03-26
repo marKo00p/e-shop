@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Catalogue</title>
+</head>
+<body>
+<div>
+    <div class="parent-catalogue"><header th:replace="~{index :: index_header}"></header></div>
+    <div class="main-catalogue">
+        <div class="side-catalogue"><aside th:replace="~{index :: aside}"></aside></div>
+        <div class="main with-value">
+
+
+            <div class="catalogue-banner">
+                <div class="banner-header">
+                    <h1>WOMEN'S BAGS</h1>
+                </div>
+                <div class="banner-main">
+                    <p>The history of the purse is the history of women: women’s changing tastes,
+                        priorities, and roles in society. </p>
+                </div>
+            </div>
+            <div th:replace="~{catalogue::nav-product}">
+            </div>
+            <div class="catalogue-container">
+
+                <div id="card" class="product-card" th:each="product : ${products}">
+
+                    <div class="image-container">
+
+                        <a class="product-link" th:href="@{/product_card/{id}(id=${product.id})}">
+                            <img class="title-image" th:src="*{'data:image/jpg;base64,'+{product.image}}" alt="product image">
+                        </a>
+
+                    </div>
+                    <div class="title-body">
+                        <span class="product-badge-label" style="color:#507EBC">New arrivals</span>
+                        <div class="pdp-link">
+                            <h2 class="link">
+                                <a th:text ="${product.title}" th:href="@{/product_card/{id}(id=${product.id})}" class="product-link">Product title</a>
+                                <h3>$[[${product.price}]]</h3>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer th:replace="~{index :: footer}"></footer>
+</div>
+
+</body>
+</html>

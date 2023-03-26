@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Title</title>
+
+    <nav th:fragment="topBar" class="navbar navbar-expand-lg navbar-light border-bottom">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info mr-4">
+                <i class="fas fa-align-left"></i>
+            </button>
+            <form class="form-inline frm">
+                <input class="form-control mr-sm-2" type="search" value="" id="search" placeholder="Search" aria-label="Search">
+                <div class="dropdown-menu dropdown-menu-right ml-4" id="dropdown-container"></div>
+            </form>
+            <button class="btn btn-light d-inline-block d-lg-none ml-auto" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+        </div>
+    </nav>
+
+</head>
+<body>
+
+</body>
+</html>

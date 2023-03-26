@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="status_content">
+        <form th:action="@{/status}" method="post" th:object="${order}">
+
+<label for="status">Choose status</label>
+<select class="form-control selectpicker" th:field="*{status}" id="status">
+  <option value="">Nothing selected</option>
+  <option th:each="order : ${T(com.shopy.trainshop.domain.OrderStatus.values()}"
+          th:value="${status}"
+          th:text="${status}">pizza
+  </option>
+
+</select>
+            </form>
+</div>
+</body>
+</html>
