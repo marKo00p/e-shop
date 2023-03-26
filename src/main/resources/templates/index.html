@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel='stylesheet' th:href="@{/css/style.css}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://kit.fontawesome.com/ac3bcbb247.js" crossorigin="anonymous"></script>
+<html lang="en"  xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>index</title>
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel='stylesheet' th:href="@{/css/style.css}">-->
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />-->
+<!--&lt;!&ndash;    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">&ndash;&gt;-->
 
+<!--    <script src="/node_modules/bootstrap-5.0.2/dist/js/bootstrap.min.js"></script>-->
+<!--    <script src="/node_modules/jQuery-3.6.0/jquery-3.6.0.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/ac3bcbb247.js" crossorigin="anonymous"></script>-->
+<!--    <script th:src="@{javascript/javascript.js}"></script>-->
 </head>
 <body class="container">
 
 <div id="static-content" class="flex-container">
 
-    <header class="header">
+    <header class="header" th:fragment="index_header">
         <div class="search-field">
-            <form action="" class="search">
-                <input type="text" placeholder="Search.." name="s">
+
+            <form th:action="@{/products}" class="search" method="get">
+                <input  type="text" id="txtSearch"  placeholder="Search.."  name="keyword">
+                <div class="dropdown-menu dropdown-menu-right ml-4" id="dropdown-container"></div>
                 <button type="submit"><img src="./images/search.png" alt="search"></button>
             </form>
+
         </div>
 
         <div class="lg-container">
@@ -28,14 +36,16 @@
     </header>
 
     <main>
-        <aside class="aside">
+        <aside class="aside" th:fragment="aside">
             <div class="sidebar">
                 <div>
                     <ul>
                         <li><a th:href="@{/home}"><i class="fa fa-fw fa-home"></i>Home</a></li>
                         <li sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/services}"><i class="fa fa-fw fa-wrench"></i>Services</a></li>
                         <li sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/clients}"><i class="fa fa-fw fa-user"></i>Clients</a></li>
-                        <li><a th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i>Cart</a></li>
+                        <li><a th:href="@{/bucket}"><i class="fa-solid fa-cart-shopping">
+                            <span class="badge" th:text="${buckets.totalItems == null} ? '0' : ${buckets.totalItems}"></span>
+                        </i>Bucket</a></li>
                         <li><a th:href="@{/catalogue}"><i class="fa-solid fa-bars"></i>Catalogue</a></li>
                         <li sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/statistics}"><i class="fa-solid fa-table"></i>Statistics</a></li>
                     </ul>
@@ -49,7 +59,7 @@
 
                     <div class="language">
                         <span><a href="#" class="active">eng</a></span>
-                        <span ><a href="#">ukr</a></span>
+                        <span><a href="#">ukr</a></span>
 
                     </div>
                 </div>
@@ -57,25 +67,22 @@
         </aside>
 
         <section class="main">
-<!--                <div class="current_user">-->
-<!--                    Hello, <span sec:authentication="userName">name</span>-->
-<!--                </div>-->
-<!--            <div>-->
-<!--                <a th:href="@{/logout}">Logout</a>-->
-<!--            </div>-->
+                <div class="current_user">
+                    Welcome, <span sec:authentication="name">name</span>
+                </div>
+            <div>
+                <a th:href="@{/logout}">Logout</a>
+            </div>
 
             <div th:insert="~{home :: #home-paige}"></div>
 
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" th:fragment="footer">
         <p>Company © y_semykina. All rights reserved.</p>
     </footer>
 
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script th:src="@{javascript/javascript.js}"></script>
 </body>
 </html>

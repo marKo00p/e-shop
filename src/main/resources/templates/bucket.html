@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Bucket</title>
+</head>
+<body>
+<div class="parent-add_product"><header th:replace="~{index :: index_header}"></header>
+  <div class="main-add_product">
+    <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
+
+<div class="cart-body">
+
+  <div class="cart-container">
+    <div class="card-body">
+
+      <div id="cart" class="tabcontent">
+        <div class="col-12">
+          <div class="row">
+
+            <div class=" table-responsive shopping-cart"
+                 style="background-color: #fff">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Product</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Subtotal</th>
+                  <th class="text-center">
+                    <a class="btn btn-sm btn-outline-danger clear" th:href="@{/clearBucket}">Clear </a></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${buckets.bucketItems}">
+                  <td>
+                    <div class="product-item">
+                      <a class="product-thumb">
+                        <img
+                              th:src="*{'data:image/jpeg;base64,'+{item.product.image}}" alt="Product"></a>
+                      <div class="product-info">
+                        <h4 class="product-title">
+                          <a th:href="@{/product_card/{id}(id=${product.id})}">[[${item.product.title}]]</a>
+                        </h4>
+                        <span><em>Price:</em>$[[${item.product.price}]]</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="text-center">
+
+                  <form th:action="@{/update-bucket}" method="post">
+                      <input type="hidden" th:value="${item.id}" name="bucket_item_id" />
+                      <div class="input-group">
+                        <input type="number" min="1" th:value="${item.quantity}" th:attr="max=${item.product.quantity}" name="quantity" class="form-control" placeholder="1"/>
+
+                        <button type="submit" class="cart-btn">Update</button>
+                      </div>
+                    </form>
+                  </td>
+
+                  <td class="text-center text-lg text-medium">$[[${item.product.price * item.quantity}]]</td>
+
+                  <td class="text-center">
+                    <a class="remove-from-cart" th:href="@{/removeBucket/{id}(id = ${item.id})}" data-toggle="tooltip">
+                      <i class="fa fa-trash"></i></a></td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="shopping-cart-footer">
+<!--              <div class="column">-->
+<!--                <form class="coupon-form" method="post">-->
+<!--                  <input class="form-control round-input form-control-sm" type="text"-->
+<!--                         placeholder="Coupon code" required="">-->
+<!--                  <button class="btn btn-outline-primary btn-sm"-->
+<!--                          type="submit">Apply Coupon</button>-->
+<!--                </form>-->
+<!--              </div>-->
+              <div class="column text-lg">
+                <b>Subtotal: <span class="text-medium">$[[${buckets.totalPrice}]]</span></b>
+              </div>
+            </div>
+            <div class="shopping-cart-footer">
+              <div class="column">
+                <a class="btn btn-outline-secondary back" href="/"><i
+                        class="fas fa-arrow-left"></i>&nbsp;Back to Shopping</a>
+              </div>
+              <div class="column cart-button">
+
+                <a class="btn checkout btn-success" th:href="@{/order}">Checkout</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+  </div>
+</div>
+  <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
+</div>
+<script>
+
+</script>
+
+</body>
+</html>

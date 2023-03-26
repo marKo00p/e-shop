@@ -1,50 +1,85 @@
 package com.shopy.trainshop.controllers;
 
+import com.shopy.trainshop.domain.Order;
+import com.shopy.trainshop.domain.OrderStatus;
+import com.shopy.trainshop.domain.User;
+import com.shopy.trainshop.service.OrderService;
+import com.shopy.trainshop.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class MainController {
-    @RequestMapping({"","/"})
-    public String index(){
-        return "index"; }
+    private final ProductService productService;
+    private final OrderService orderService;
+
+    public MainController(ProductService productService, OrderService orderService) {
+        this.productService = productService;
+        this.orderService = orderService;
+    }
+
+    @GetMapping({"", "/"})
+    public String index(Model model) {
+        model.addAttribute("products", productService.getAll());
+        return "index";
+    }
+
+
+    @RequestMapping({"", "/"})
+    public String index() {
+
+        return "index";
+    }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @RequestMapping("/login-error")
-    public String loginError(Model model){
+    public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
     }
+
     @RequestMapping("/home")
-    public String home(){
+    public String home() {
         return "index";
     }
-    @RequestMapping("/cart")
-    public String cart(){
-        return "cart";
-    }
-    @RequestMapping("/catalogue")
-    public String catalogue(){
-        return "catalogue";
-    }
-    @RequestMapping("/order")
-    public String order(){
-        return "order";
-    }
-    @RequestMapping("/product_card")
-    public String productCard(){
-        return "product_card";
-    }
-    @RequestMapping("/services")
-    public String service(){
-        return "services";
-    }
+
+
     @RequestMapping("/statistics")
-    public String statistics(){
+    public String statistics(Model model) {
+        List<Order> order = orderService.getAll();
+        model.addAttribute("orders", order);
         return "statistics";
     }
+
+//    @PostMapping("/order-status")
+//    public String updateCustomer(@ModelAttribute("order") Order order,
+//                                 Model model,
+//                                 RedirectAttributes redirectAttributes) {
+//
+//        Order updatedOrder = orderService.saveOrderStatus(order);
+//        redirectAttributes.addFlashAttribute("order", updatedOrder);
+//        return "redirect:/statistics";
+//    }
+@GetMapping("/status")
+public String main(Model model) {
+    model.addAttribute("order", new Order());
+    return "statistics";
+}
+@PostMapping("/status")
+public String updateOrderStatus(Order order,
+                                Model model
+                                ) {
+model.addAttribute("order", order);
+//    redirectAttributes.addFlashAttribute("order", updatedOrder);
+    return "redirect:/statistics";
+}
 }

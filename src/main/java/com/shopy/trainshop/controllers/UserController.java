@@ -18,7 +18,7 @@ public class UserController {
     }
     @GetMapping("/clients")
     public String userList(Model model){
-        model.addAttribute("users",userService.getAll());
+        model.addAttribute("users",userService.showAll());
         return "clients";
     }
     @GetMapping("/sign_up")

@@ -1,16 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel='stylesheet' th:href="@{/css/style.css}">
-    <title>Title</title>
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Order</title>
 </head>
 <body>
-<div class="order-body">
-  <div class="order-input">
+<div class="parent-add_product"><header th:replace="~{index :: index_header}"></header>
+    <div class="main-add_product">
+        <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
 
-  </div>
+        <div class="order-container">
+            <div class="text alert alert-warning" th:if = "${error}">
+                <p th:text="${error}"></p>
+            </div>
+            <div class="title">
+                <h2> Your Order</h2>
+            </div>
+            <div class="d-flex">
+                <form th:action="@{/order-info}" method="post" th:object="${user}">
+                    <label for="username">
+                        <span class="fname"> Name <span class="required"> * </span></span>
+                        <input type="text"  th:field="*{name}" name="name" id="username">
+                    </label>
 
+                    <label for="userCity">
+                        <span class="fcity"> City <span class="required"> * </span></span>
+                        <input type="text"  th:field="*{city}" name="city" id="userCity">
+                    </label>
+
+                    <label for="userAddress">
+                        <span> Address <span class="required"> * </span></span>
+                        <input type="text" th:field="*{address}" id="userAddress" name="address" placeholder="House number and street name" required>
+                    </label>
+
+                    <label for="userZip">
+                        <span> Postcode / ZIP <span class="required">*</span></span>
+                        <input type="text" th:field="*{zipCode}" id="userZip"  name="zipCode">
+                    </label>
+
+                    <label for="userPhoneNumber">
+                        <span> Phone Number <span class="required">*</span></span>
+                        <input type="tel" th:field="*{phoneNumber}" id="userPhoneNumber" name="phoneNumber">
+                    </label>
+                    <label for="userEmail">
+                        <span> Email Address <span class="required">*</span></span>
+                        <input type="email" th:field="*{email}" id="userEmail" name="email">
+                    </label>
+                    <button type="submit" class="cart-btn">Save</button>
+                </form>
+
+                <div class="order" >
+                    <table>
+                        <tr>
+                            <th colspan="2"> Your order </th>
+                        </tr>
+                        <tr>
+                            <div th:each="item : ${bucket.bucketItems}">
+                            <td ><a th:href="@{/product_card}"
+                                th:text="${item.product.title}"></a></td>
+                            <td><div class="small text-muted">Price: $[[${item.product.price}]]</div></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td> Subtotal </td>
+                            <td><span class="text-medium">$[[${buckets.totalPrice}]]</span></td>
+                        </tr>
+                        <tr>
+                            <td> Shipping </td>
+                            <td> Free shipping </td>
+                        </tr>
+                    </table><br>
+                    <div>
+                        <input type="radio" name="dbt" value="dbt" checked> Direct Bank Transfer
+                    </div>
+                    <p>
+                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                    </p>
+                    <div>
+                        <input type="radio" name="dbt" value="cd"> Cash on Delivery
+                    </div>
+                    <div>
+                        <input type="radio" name="dbt" value="cd"> Paypal <span>
+      </span>
+                    </div>
+                    <div class="order-button"><a th:href="@{/text_box}" class="ml-auto btn hvr-hover">Place Order</a></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+    <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
 </body>
 </html>

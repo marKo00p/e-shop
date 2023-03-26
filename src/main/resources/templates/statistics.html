@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <link rel='stylesheet' th:href="@{/css/style.css}">
-    <title>Title</title>
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Statistics</title>
 </head>
 <body>
+<header th:replace="~{index :: header}"></header>
+<aside th:replace="~{index :: aside}"></aside>
+
 <div class="statistics-body">
-  <div>
-    <table>
-      <tr><th>Date</th><th>Total_sales</th><th>Product_name</th><th>Product_id</th><th>Selling_price</th></tr>
+  <table id="statistics-table" class="display">
+    <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Order Creation Date</th>
+      <th>Customer Address</th>
+      <th>Order Status</th>
+      <th>Total Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+      <td th:text ="${order.id}">Order Id</td>
+      <td th:text ="${order.created}">Order Creation Date</td>
+      <td th:text ="${order.address}">Customer Address</td>
 
-      <tr><td>01.01.2022</td><td>10</td><td>Leather bag with golden chain</td><td>00001</td><td>99.99$</td></tr>
-      <tr><td>01.01.2022</td><td>5</td><td>Red purse</td><td>00002</td><td>49.99$</td></tr>
+      <td>
+<div th:replace="~{/fragments/status :: status_content}"></div>
 
-    </table>
-  </div>
+<!--        <form th:action="@{/order-status}" method="post">-->
 
-  <div class="statistics-btn">
-    <a href="#" class="previous"> Previous</a>
-    <a href="#" class="next">Next </a>
-  </div>
+<!--          <select th:text="*{order.status}">-->
+<!--          <option th:value="NEW" th:selected="${order.status == 'NEW'}">NEW</option>-->
+<!--          <option th:value="APPROVED" th:selected="${order.status == 'APPROVED'}">APPROVED</option>-->
+<!--          <option th:value="PAID" th:selected="${order.status == 'PAID'}">PAID</option>-->
+<!--          <option th:value="CLOSED" th:selected="${order.status == 'CLOSED'}">CLOSED</option>-->
+<!--          <option th:value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Cancelled</option>-->
+<!--        </select>-->
 
-</div>
+<!--          </form>-->
+      </td>
+
+      <td th:text ="${order.totalPrice}">Total Price</td>
+    </tr>
+    </tbody>
+
+</table>
+<script>
+  $(document).ready(function () {
+  $('#statistics-table').DataTable();
+});
+</script>
 </body>
 </html>

@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <link rel='stylesheet' th:href="@{/css/style.css}">
-    <title>Title</title>
+<head th:replace="~{/fragments/header :: head_content}">
+  <title>Product</title>
 </head>
 <body>
+<div class="parent-add_product"><header th:replace="~{index :: index_header}"></header>
+  <div class="main-add_product">
+    <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
 <div class="product-container">
 
-
+<form th:action="@{/add_product_to_bucket}" method="post">
   <div class="left-column">
-    <img data-image="orange_bag" src="./images/orange_bag.jpg" alt="orange_bag" title="Leather bag with gold chain">
+    <img th:inline="text" th:if="${product.image != null}" th:src="*{'data:image/jpg;base64,'+{product.image}}" alt="product image">
   </div>
+
 
   <div class="right-column">
 
     <div class="product-description">
+
       <span>Bags</span>
-      <h1>Leather bag</h1>
-      <p>Leather bag with gold chain</p>
+      <h1 th:text ="${product.title}">Product title</h1>
+      <p th:text="${product.description}">Product description</p>
     </div>
 
     <div class="product-price">
-      <span>100$</span>
-      <a href="/cart" class="cart-btn">Add to cart</a>
+        <span><em>Price:</em>$[[${product.price}]]</span>
+        <br/>
+      <span th:inline="text"><em>In Stock:</em>[[${product.quantity}]]</span>
+
+        <input type="number" min="1" value="1" name="quantity" class="form-control" placeholder="1"/>
+
+        <input type="hidden" th:value="${product.id}" name="id">
+        <button type="submit" class="cart-btn">Add to Bucket</button>
     </div>
   </div>
+</form>
 
 </div>
+</div>
+<footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
+</div>
+
 </body>
 </html>
