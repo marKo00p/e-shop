@@ -11,7 +11,7 @@
 <div class="cart-body">
 
   <div class="cart-container">
-    <div class="card-body">
+    <div class="card-container">
 
       <div id="cart" class="tabcontent">
         <div class="col-12">
@@ -19,7 +19,7 @@
 
             <div class=" table-responsive shopping-cart"
                  style="background-color: #fff">
-              <table class="table">
+              <table class="table" style="width: 70%;">
                 <thead>
                 <tr>
                   <th>Product</th>
@@ -38,7 +38,7 @@
                               th:src="*{'data:image/jpeg;base64,'+{item.product.image}}" alt="Product"></a>
                       <div class="product-info">
                         <h4 class="product-title">
-                          <a th:href="@{/product_card/{id}(id=${product.id})}">[[${item.product.title}]]</a>
+                          <a >[[${item.product.title}]]</a>
                         </h4>
                         <span><em>Price:</em>$[[${item.product.price}]]</span>
                       </div>

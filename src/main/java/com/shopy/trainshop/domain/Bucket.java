@@ -23,7 +23,6 @@ public class Bucket {
     @Column(name = "bucket_id")
     private Long id;
 
-//    @Transient
     @Column(name="total_items")
     private Integer totalItems;
 
@@ -38,7 +37,6 @@ public class Bucket {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BucketItem> bucketItems = new HashSet<BucketItem>();

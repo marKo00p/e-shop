@@ -15,6 +15,7 @@
         <th>Role</th>
         <th>City</th>
         <th>Phone Number</th>
+        <th>Client Zip Code</th>
     </tr>
     </thead>
     <tbody>
@@ -22,8 +23,9 @@
         <td th:text ="${user.name}">Client_name</td>
         <td th:text ="${user.email}">Client_email</td>
         <td th:text ="${user.role}">Client_role</td>
-        <td th:text ="${user.city}">Client_role</td>
+        <td th:text ="${user.city}">Client_city</td>
         <td th:text ="${user.phoneNumber}">Client_phoneNumber</td>
+        <td th:text ="${user.zipCode}">Client_Zip_Code</td>
     </tr>
     </tbody>
   </table>

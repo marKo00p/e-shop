@@ -4,53 +4,10 @@ $(function () {
         $('div.theme-btn span:first-child').toggleClass('active')
         $('div.theme-btn span:last-child').toggleClass('active')
     })
-
-
 })
 
 let currentActiveMenu = $('main aside div.sidebar div ul li a[href="' + location.pathname + '"]')
 currentActiveMenu.addClass('active')
-
-
-
-// for Edit product in service.html
-
-// $(document).ready(function() {
-//     $('.edit-table tbody tr td .Ebtn').on('click', function (event){
-//         event.preventDefault();
-//         const href = $(this).attr('href');
-//         $.get(href, function (product,status){
-//             $('#PId').val(product.id);
-//             $('#PTitle').val(product.title);
-//             $('#PPrice').val(product.price);
-//             $('#PDescription').val(product.description);
-//             $('#PQuantity').val(product.quantity);
-//              $('#PImage').val(product.image);
-//                 $('#editModal').modal();
-//             })
-//             .fail(function() {
-//                 console.log('Error getting product');
-//             });
-//     });
-// });
-
-$(document).ready(function() {
-    $('.edit-table tbody tr td .btn').on('click',function (event){
-        event.preventDefault();
-        let href = $(this).attr('href');
-        $.get(href, function (product,status){
-            $('#editModal #PId').val(product.id);
-            $('#editModal #PTitle').val(product.title);
-            $('#editModal #PPrice').val(product.price);
-            $('#editModal #PDescription').val(product.description);
-            $('#editModal #PQuantity').val(product.quantity);
-            $('#editModal #PImage').val('src',product.image);
-        });
-        $('.formModal #editModal').modal();
-        });
-});
-
-
 
 //JS for sing_up.html
 $(document).ready(function() {
@@ -114,42 +71,7 @@ $(document).ready(function() {
 });
 });
 
-//JS for add_product.html
-$(function () {
-    function validateForm() {
-        let formInputs = $("form[name='productForm']").serializeArray();
 
-        for (let i = 0; i < formInputs.length; i++) {
-            let input = formInputs[i];
-            if (input.value == "") {
-                alert(input.name + " must be filled out");
-                return false;
-            }
-        }
-        return true;
-    }
-})
-//JS for search field in top_bar.html
-$(document).on('keydown', '#search', function(event) {
-    const val = $(this).val();
-    if (val.length > 1) {
-        $.ajax({
-            type: 'GET',
-            url: `/search?value=${val}`,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 6000
-        })
-            .done(function(data) {
-                $('.dropdown-toggle').dropdown();
-                $('#dropdown-container').empty().append(data);
-            })
-            .fail(function(error) {
-                console.log('ERROR:', error);
-            });
-    }
-});
 
 
 

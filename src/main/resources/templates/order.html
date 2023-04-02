@@ -12,6 +12,7 @@
             <div class="text alert alert-warning" th:if = "${error}">
                 <p th:text="${error}"></p>
             </div>
+
             <div class="title">
                 <h2> Your Order</h2>
             </div>
@@ -19,12 +20,12 @@
                 <form th:action="@{/order-info}" method="post" th:object="${user}">
                     <label for="username">
                         <span class="fname"> Name <span class="required"> * </span></span>
-                        <input type="text"  th:field="*{name}" name="name" id="username">
+                        <input type="text"  th:field="*{name}" name="name" id="username" required>
                     </label>
 
                     <label for="userCity">
                         <span class="fcity"> City <span class="required"> * </span></span>
-                        <input type="text"  th:field="*{city}" name="city" id="userCity">
+                        <input type="text"  th:field="*{city}" name="city" id="userCity" required>
                     </label>
 
                     <label for="userAddress">
@@ -34,16 +35,16 @@
 
                     <label for="userZip">
                         <span> Postcode / ZIP <span class="required">*</span></span>
-                        <input type="text" th:field="*{zipCode}" id="userZip"  name="zipCode">
+                        <input type="text" th:field="*{zipCode}" id="userZip"  name="zipCode" required>
                     </label>
 
                     <label for="userPhoneNumber">
                         <span> Phone Number <span class="required">*</span></span>
-                        <input type="tel" th:field="*{phoneNumber}" id="userPhoneNumber" name="phoneNumber">
+                        <input type="tel" th:field="*{phoneNumber}" id="userPhoneNumber" name="phoneNumber" required>
                     </label>
                     <label for="userEmail">
                         <span> Email Address <span class="required">*</span></span>
-                        <input type="email" th:field="*{email}" id="userEmail" name="email">
+                        <input type="email" th:field="*{email}" id="userEmail" name="email" required>
                     </label>
                     <button type="submit" class="cart-btn">Save</button>
                 </form>
@@ -70,18 +71,9 @@
                         </tr>
                     </table><br>
                     <div>
-                        <input type="radio" name="dbt" value="dbt" checked> Direct Bank Transfer
+                        <input type="radio" name="dbt" value="Cash on Delivery"> Cash on Delivery
                     </div>
-                    <p>
-                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                    </p>
-                    <div>
-                        <input type="radio" name="dbt" value="cd"> Cash on Delivery
-                    </div>
-                    <div>
-                        <input type="radio" name="dbt" value="cd"> Paypal <span>
-      </span>
-                    </div>
+
                     <div class="order-button"><a th:href="@{/text_box}" class="ml-auto btn hvr-hover">Place Order</a></div>
 
                 </div>
@@ -90,7 +82,8 @@
         </div>
 
     </div>
-</div>
     <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
+</div>
+
 </body>
 </html>

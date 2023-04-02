@@ -30,12 +30,6 @@ public class MainController {
     }
 
 
-    @RequestMapping({"", "/"})
-    public String index() {
-
-        return "index";
-    }
-
     @RequestMapping("/login")
     public String login() {
         return "login";
@@ -52,7 +46,6 @@ public class MainController {
         return "index";
     }
 
-
     @RequestMapping("/statistics")
     public String statistics(Model model) {
         List<Order> order = orderService.getAll();
@@ -60,26 +53,4 @@ public class MainController {
         return "statistics";
     }
 
-//    @PostMapping("/order-status")
-//    public String updateCustomer(@ModelAttribute("order") Order order,
-//                                 Model model,
-//                                 RedirectAttributes redirectAttributes) {
-//
-//        Order updatedOrder = orderService.saveOrderStatus(order);
-//        redirectAttributes.addFlashAttribute("order", updatedOrder);
-//        return "redirect:/statistics";
-//    }
-@GetMapping("/status")
-public String main(Model model) {
-    model.addAttribute("order", new Order());
-    return "statistics";
-}
-@PostMapping("/status")
-public String updateOrderStatus(Order order,
-                                Model model
-                                ) {
-model.addAttribute("order", order);
-//    redirectAttributes.addFlashAttribute("order", updatedOrder);
-    return "redirect:/statistics";
-}
 }

@@ -23,28 +23,13 @@
       <td th:text ="${order.id}">Order Id</td>
       <td th:text ="${order.created}">Order Creation Date</td>
       <td th:text ="${order.address}">Customer Address</td>
-
-      <td>
-<div th:replace="~{/fragments/status :: status_content}"></div>
-
-<!--        <form th:action="@{/order-status}" method="post">-->
-
-<!--          <select th:text="*{order.status}">-->
-<!--          <option th:value="NEW" th:selected="${order.status == 'NEW'}">NEW</option>-->
-<!--          <option th:value="APPROVED" th:selected="${order.status == 'APPROVED'}">APPROVED</option>-->
-<!--          <option th:value="PAID" th:selected="${order.status == 'PAID'}">PAID</option>-->
-<!--          <option th:value="CLOSED" th:selected="${order.status == 'CLOSED'}">CLOSED</option>-->
-<!--          <option th:value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Cancelled</option>-->
-<!--        </select>-->
-
-<!--          </form>-->
-      </td>
-
+      <td th:text ="${order.status}">Order Status</td>
       <td th:text ="${order.totalPrice}">Total Price</td>
     </tr>
     </tbody>
 
 </table>
+</div>
 <script>
   $(document).ready(function () {
   $('#statistics-table').DataTable();

@@ -4,8 +4,8 @@
     <title>Products</title>
 </head>
 <body>
-<div class="parent-add_product"><header th:replace="~{index :: index_header}"></header>
-<div class="main-add_product">
+<div class="main-add_product"><header th:replace="~{index :: index_header}"></header>
+<div class="add_product">
     <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
 
 <div class="add_product-body">
@@ -26,20 +26,20 @@
 <form name="productForm" th:action="@{/add_product}" th:object="${product}" enctype="multipart/form-data" method="post">
     <div class="form-group">
         <label for="name">Product title</label>
-        <input type="text"  th:field="*{title}" name="title" id="name" class="form-control" placeholder="Enter the title">
+        <input type="text"  th:field="*{title}" name="title" id="name" class="form-control" placeholder="Enter the title" required>
 
         <label for="name">Product price</label>
-        <input type="text" th:field="*{price}" name="price" id="price" class="form-control" placeholder="Enter the price">
+        <input type="text" th:field="*{price}" name="price" id="price" class="form-control" placeholder="Enter the price" required>
 
         <label for="name">Product description</label>
-        <input type="text" th:field="*{description}" name="description" id="description" class="form-control" placeholder="Enter description">
+        <input type="text" th:field="*{description}" name="description" id="description" class="form-control" placeholder="Enter description" required>
 
         <label for="name">Product quantity</label>
-        <input type="number" th:field="*{quantity}" name="quantity" id="quantity" class="form-control" placeholder="Enter the quantity">
+        <input type="number" th:field="*{quantity}" name="quantity" id="quantity" class="form-control" placeholder="Enter the quantity" required>
 
         <label for="name">Product image</label>
         <div class="custom-file">
-            <input th:field="*{image}" accept="image/jpg, image/jpeg" name="image" type="file" class="custom-file-input" id="customFile">
+            <input th:field="*{image}" accept="image/jpg, image/jpeg" name="image" type="file" class="custom-file-input" id="customFile" required>
             <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
         <br>

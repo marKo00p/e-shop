@@ -5,7 +5,7 @@
 </head>
 <body>
 <header th:replace="~{index :: header}"></header>
-<!--<p style="color:darkred" th:if="${loginError}" class="error">Wrong email or password</p>-->
+<p style="color:darkred" th:if="${loginError}" class="error">Wrong email or password</p>
 
 <form action="login" name="loginForm" method="post" style="border:1px solid #ccc">
     <div class="flex-login">
@@ -17,9 +17,6 @@
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" id="psw" name="password"  required>
 
-<!--        <label>-->
-<!--            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me-->
-<!--        </label>-->
 
         <div class="login-clearfix">
             <button type="submit" name="submit" value="Login" class="login-btn">Login</button>
@@ -27,7 +24,7 @@
     </div>
 </form>
 <div class="login-footer">
-        <a class="login-forgot" href="#">Forgot Password?</a>
+
         <div class="login-wrapper">
             <a th:href="@{/sign_up}">Don't have an account? <span class="login-text-primary">Create One</span></a>
         </div>

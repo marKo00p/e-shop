@@ -8,18 +8,14 @@
   <div class="main-add_product">
     <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
 
-      <header class="site-header" id="header">
-          <h1 class="site-header__title" data-lead-id="site-header-title">Thank you!</h1>
-      </header>
 
-      <div class="main-content">
-          <i class="fa fa-check main-content__checkmark" id="checkmark"></i>
-          <p class="main-content__body" data-lead-id="main-content-body">  for your order and for supporting our business. Your order is complite. You will be receiving a confirmation email with order details.</p>
+      <div class="text-content">
+          <i class="fa fa-check" id="checkmark" style="font-size:48px;color:#003d00;"></i>
+          <p class="main-content_body" data-lead-id="main-content-body">Thank you! for your order and for supporting our business. Your order is complite. You will be receiving a confirmation email with order details.</p>
       </div>
 
   </div>
+    <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
 </div>
-  <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
-
 </body>
 </html>

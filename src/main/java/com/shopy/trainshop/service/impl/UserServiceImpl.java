@@ -5,17 +5,12 @@ import com.shopy.trainshop.domain.Role;
 import com.shopy.trainshop.domain.User;
 import com.shopy.trainshop.dto.UserDTO;
 import com.shopy.trainshop.service.UserService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +21,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final static String USER_EMAIL_NOT_FOUND = "user with email %s not found";
 
-    private  UserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -72,6 +68,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUserInfo(User user) {
         User user1 = userRepository.findFirstByEmail(user.getEmail());
+        if(user1 == null) {
+            throw new UsernameNotFoundException(String.format(USER_EMAIL_NOT_FOUND, user.getEmail()));
+        }
         user1.setCity(user.getCity());
         user1.setAddress(user.getAddress());
         user1.setZipCode(user.getZipCode());

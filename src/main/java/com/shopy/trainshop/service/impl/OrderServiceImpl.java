@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
             orderDetailsRepository.save(orderDetails);
             orderDetailsList.add(orderDetails);
             bucketItemRepository.delete(item);
+
         }
         order.setDetails(orderDetailsList);
         bucket.setBucketItems(new HashSet<>());
@@ -66,22 +67,5 @@ public class OrderServiceImpl implements OrderService {
         List<String> fullAddress = Arrays.asList(user.getZipCode(), user.getCity(), user.getAddress());
         return String.join(" ", fullAddress);
     }
-
-//    @Override
-//    public Order saveOrderStatus(Order order) {
-//        Optional<Order> optionalOrder = orderRepository.findById(order.getId());
-//        Order order1 = new Order();
-//        if (optionalOrder.isPresent()) {
-//            optionalOrder.get();
-//            order1.setStatus(order.getStatus());
-//
-//        }
-//        return  orderRepository.save(order1);
-//    }
-      @Override
-      public void updateOrderStatus(Long id, OrderStatus orderStatus){
-        Order order = orderRepository.findById(id).orElse(null);
-        order.setStatus(orderStatus);
-}
 
 }

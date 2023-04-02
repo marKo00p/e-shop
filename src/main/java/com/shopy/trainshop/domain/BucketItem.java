@@ -31,14 +31,7 @@ public class BucketItem {
     @Temporal(TemporalType.DATE)
     @Column(name="date")
     private Date date;
-//    @Column(name = "total_price")
-//    private BigDecimal totalPrice;
 
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "bucket_id", referencedColumnName = "bucket_id")
-//    private Bucket bucket;
-
-//    @OneToOne(fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id",nullable=false, updatable=false)
     private Product product;
@@ -46,21 +39,15 @@ public class BucketItem {
     public Long getId() {
         return id;
     }
-
     public Integer getQuantity() {
         return quantity;
     }
-
-
-
     public Product getProduct() {
         return product;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }

@@ -10,7 +10,5 @@ import java.util.List;
 public interface OrderService {
     void saveOrder(Bucket bucket);
     List<Order> getAll();
-//    Order saveOrderStatus(Order oder);
-    void updateOrderStatus(Long id,OrderStatus orderStatus);
 
 }

@@ -20,16 +20,12 @@ import java.util.*;
 @Service
 public class BucketServiceImpl implements BucketService {
     private final BucketRepository bucketRepository;
-    private final ProductRepository productRepository;
     private final ProductService productService;
-    private final UserService userService;
     private final BucketItemRepository bucketItemRepository;
 
-    public BucketServiceImpl(BucketRepository bucketRepository, ProductRepository productRepository, ProductService productService, UserService userService, BucketItemRepository bucketItemRepository) {
+    public BucketServiceImpl(BucketRepository bucketRepository, ProductService productService, BucketItemRepository bucketItemRepository) {
         this.bucketRepository = bucketRepository;
-        this.productRepository = productRepository;
         this.productService = productService;
-        this.userService = userService;
         this.bucketItemRepository = bucketItemRepository;
     }
     @Override

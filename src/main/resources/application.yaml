@@ -47,14 +47,7 @@
 
 
 
-  #   flyway:
-#     baseline-on-migrate: true
-#     locations: classpath:db/migration
-#     enabled: true
-#     sql-migration-prefix: V
-#     default-schema: public
-#     init-version:
-#     init-sqls:
+
 
 
  #     # INTERNATIONALIZATION (MessageSourceAutoConfiguration)
@@ -63,13 +56,3 @@
 #    basename: messages
 #    encoding: UTF-8
 #
-
-
-#     spring.mail.host=smtp.acme.org # mail server host
-#     spring.mail.port= # mail server port
-#     spring.mail.username=
-#     spring.mail.password=
-#     spring.mail.default-encoding=UTF-8 # encoding to use for MimeMessages
-#     spring.mail.properties.*= # properties to set on the JavaMail session
-
-

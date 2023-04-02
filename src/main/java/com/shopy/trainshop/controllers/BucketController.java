@@ -1,29 +1,16 @@
 package com.shopy.trainshop.controllers;
 
-import com.shopy.trainshop.domain.Bucket;
-import com.shopy.trainshop.domain.BucketItem;
-import com.shopy.trainshop.domain.Product;
-import com.shopy.trainshop.dto.BucketDTO;
-import com.shopy.trainshop.dto.BucketItemDTO;
-import com.shopy.trainshop.dto.ProductDTO;
 import com.shopy.trainshop.service.BucketService;
 import com.shopy.trainshop.service.ProductService;
 import com.shopy.trainshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.shopy.trainshop.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BucketController {
@@ -37,14 +24,7 @@ public class BucketController {
         this.userService = userService;
     }
         @GetMapping("/bucket")
-    public String bucket(Model model, HttpServletRequest request){
-//            String sessionToken = (String) request.getSession(true).getAttribute("sessionToken");
-//            if (sessionToken == null) {
-//                model.addAttribute("buckets", new Bucket());
-//            } else {
-//                Bucket bucket = bucketService.getBucketBySessionToken(sessionToken);
-//                model.addAttribute("buckets", bucket);
-//            }
+        public String bucket(Model model, HttpServletRequest request){
                 return "/bucket";
         }
 
