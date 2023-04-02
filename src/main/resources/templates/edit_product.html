@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/fragments/header :: head_content}">
+    <title>Title</title>
+</head>
+<body>
+<div class="main-add_product"><header th:replace="~{index :: index_header}"></header>
+    <div class="add_product">
+        <div class="side-add_product"><aside th:replace="~{index :: aside}"></aside></div>
+
+
+        <div class="form">
+            <form th:action="@{/edit_product}" enctype="multipart/form-data" th:object="${product}" method="post">
+                <div class="form-group">
+
+                    <label for="PId" class="col-form-label">Id</label>
+                    <input type="text" th:value="${product.id}"  class="form-control" id="PId" name="id" >
+
+
+                    <label for="PTitle" class="col-form-label">Title</label>
+                    <input type="text" th:value="${product.title}"  class="form-control" id="PTitle" name="title">
+
+
+                    <label for="PPrice" class="col-form-label">Price</label>
+                    <input type="number" th:value="${product.price}" class="form-control" id="PPrice" name="price" value="">
+
+
+                    <label for="PDescription" class="col-form-label">Description</label>
+                    <input type="text" th:value="${product.description}" class="form-control" id="PDescription" name="description" value="">
+
+                    <label for="PQuantity" class="col-form-label">Quantity</label>
+                    <input type="number" th:value="${product.quantity}" class="form-control" id="PQuantity" name="quantity" value="">
+
+                    <label class="col-form-label" for="PImage">Image</label>
+                    <br>
+
+                    <div class="custom-file">
+                        <input th:value="${product.image}" accept="image/jpg, image/jpeg, image/png" name="image" type="file" class="custom-file-input" id="PImage">
+                        <label class="custom-file-label" for="PImage"></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" value="save">Save</button>
+                </div>
+            </form>
+        </div>
+        <a class="nav-link font-weight-bold" th:href="@{/services}">List of Product</a>
+    </div>
+
+    </div>
+    <footer class="footer-add_product" th:replace="~{index :: footer}"></footer>
+</div>
+</body>
+</html>
