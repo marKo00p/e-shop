@@ -12,15 +12,25 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @WebMvcTest(controllers = UserController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -29,99 +39,46 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private UserRepository userRepository;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private AdviceController adviceController;
     @MockBean
     private UserController userController;
     @MockBean
-    private AdviceController adviceController;
-    @MockBean
     private UserService userService;
     @MockBean
-    private BucketService bucketService;
+    private Model model;
     @MockBean
-    private BucketRepository bucketRepository;
+    private UserDTO userDTO;
 
-    BucketItem bucketItem;
-    UserDTO userDTOOne;
-    UserDTO userDTOTwo;
-    User userOne;
-    User userTwo;
-    Bucket bucket;
-    List<User> userList = new ArrayList<>();
-    List<UserDTO> userDTOList = new ArrayList<>();
-    List<Order> orderList = new ArrayList<>();
-    Set<BucketItem> bucketItems = new HashSet<>();
+
     @BeforeEach
     void setUp() {
-        adviceController = new AdviceController(bucketService);
-        bucketItem = new BucketItem(1L, 1, new Date(), new Product());
-        bucketItems.add(bucketItem);
-        bucket = new Bucket(1L,1,new BigDecimal("60"),new Date(),"1223",userOne,bucketItems);
-        userOne = new User(1L,"Mike","pass","mike@gmail.com","49000",
-                "Dnipro",false,true,"+380501212123","Pravda street",
-                Role.CUSTOMER,bucket,orderList);
-
-        userTwo = new User(2L,"Oleg","pass","oleg@gmail.com","49000",
-                "Dnipro",false,true,"+380502121321","Titova street",
-                Role.CUSTOMER,bucket,orderList);
-
-        userList.add(userOne);
-        userList.add(userTwo);
-
-        userDTOOne = UserDTO.builder()
-                .userName(userOne.getName())
-                .password(userOne.getPassword())
-                .matchingPassword(userOne.getPassword())
-                .email(userOne.getEmail()).build();
-        userDTOTwo = UserDTO.builder()
-                .userName(userTwo.getName())
-                .password(userTwo.getPassword())
-                .matchingPassword(userTwo.getPassword())
-                .email(userTwo.getEmail()).build();
-        userDTOList.add(userDTOOne);
-        userDTOList.add(userDTOTwo);
+        MockitoAnnotations.initMocks(this);
+        userController = new UserController(userService);
+        userDTO = new UserDTO();
     }
+    @Test
+    void userList() {
+        when(userService.showAll()).thenReturn(mock(List.class));
 
-    @AfterEach
-    void tearDown() {
-    }
-
-//    @Test
-//    void userList()throws Exception {
-//        when(userService.getAll()).thenReturn(userDTOList);
-//        when(bucketRepository.save(bucket)).thenReturn(bucket);
-//        when(bucketService.getBucketBySessionToken("1223")).thenReturn(bucket);
-//
-//        assertNull(mockMvc.perform(MockMvcRequestBuilders.get("/clients"))
-//                .andReturn().getModelAndView());
-//
-////        mockMvc.perform(MockMvcRequestBuilders.get("/clients")
-////                        .accept(MediaType.APPLICATION_JSON)
-////                        .contentType(MediaType.APPLICATION_JSON)
-////                        .content(toJSON(userDTOOne)))
-////
-////                .andExpect(status().isOk());
-//    }
-
-    private String toJSON(Object object) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(object);
+        assertEquals("clients", userController.userList(model));
+        verify(model).addAttribute(eq("users"), any(List.class));
+        verify(userService).showAll();
     }
 
     @Test
     void newUser() {
+        assertEquals("sign_up", userController.newUser(model));
+        verify(model).addAttribute(eq("user"), any(UserDTO.class));
     }
 
     @Test
     void saveUser() {
-    }
-    private UserDTO toDto(User user) {
-        return UserDTO.builder()
-                .userName(user.getName())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .build();
+        when(userService.saveUser(userDTO)).thenReturn(true);
+        assertEquals("redirect:/", userController.saveUser(userDTO, model));
+
+        verify(userService).saveUser(userDTO);
+        verifyNoMoreInteractions(userService);
+        verifyNoInteractions(model);
     }
 
 }

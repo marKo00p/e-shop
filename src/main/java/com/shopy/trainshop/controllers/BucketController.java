@@ -15,13 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BucketController {
     private final BucketService bucketService;
-    private final ProductService productService;
-    private final UserService userService;
 
-    public BucketController(BucketService bucketService, ProductService productService, UserService userService) {
+    public BucketController(BucketService bucketService) {
         this.bucketService = bucketService;
-        this.productService = productService;
-        this.userService = userService;
     }
         @GetMapping("/bucket")
         public String bucket(Model model, HttpServletRequest request){
@@ -44,7 +40,7 @@ public class BucketController {
         }
 
     @GetMapping("/clearBucket")
-    public String clearShoopiString(HttpServletRequest request) {
+    public String clearShoppingBucket(HttpServletRequest request) {
         String sessionToken = (String) request.getSession(false).getAttribute("sessionToken");
         request.getSession(false).removeAttribute("sessionToken");
         bucketService.clearBucket(sessionToken);

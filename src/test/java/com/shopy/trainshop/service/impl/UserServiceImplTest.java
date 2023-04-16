@@ -35,8 +35,9 @@ class UserServiceImplTest {
 
     AutoCloseable autoCloseable;
     User user;
-    UserDTO userDTO;
     Bucket bucket;
+    UserDTO userDTO;
+
     List<Order> orderList = new ArrayList<>();
 
 

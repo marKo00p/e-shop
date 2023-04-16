@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -38,9 +39,32 @@ public class Product implements Serializable {
     private Integer quantity;
     @Lob
     private String image;
-//    @Column(columnDefinition = "bytea")
+    //    @Column(columnDefinition = "bytea")
 //    @Type(type = "org.hibernate.type.BinaryType")
-
 //    private byte[] image;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", quantity=" + quantity +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return id.equals(product.id) && title.equals(product.title) && price.equals(product.price) && description.equals(product.description) && quantity.equals(product.quantity) && image.equals(product.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price, description, quantity, image);
+    }
 }

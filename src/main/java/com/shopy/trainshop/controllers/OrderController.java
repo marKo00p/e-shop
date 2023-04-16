@@ -21,15 +21,13 @@ import java.security.Principal;
 @Controller
 public class OrderController {
     private final BucketService bucketService;
-    private final ProductService productService;
     private final UserService userService;
     private final OrderService orderService;
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public OrderController(BucketService bucketService, ProductService productService, UserService userService, OrderService orderService) {
+    public OrderController(BucketService bucketService, UserService userService, OrderService orderService) {
         this.bucketService = bucketService;
-        this.productService = productService;
         this.userService = userService;
         this.orderService = orderService;
 
@@ -86,9 +84,7 @@ public class OrderController {
                 "\n" +
                 "Thank you.");
 
-
         javaMailSender.send(mailMessage);
-
         return "/text_box";
         }
 
